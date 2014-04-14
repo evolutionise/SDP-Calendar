@@ -9,45 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Calendar" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" 
-        android:layout_gravity="top|left"/>   
-        
-    <Button
- 		android:id="@+id/button1"
-		style="?android:attr/buttonStyleSmall"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="15dp"
-		android:layout_column="0"
-		android:text="back" />
-
-
     <CalendarView
         android:id="@+id/calendarView1"
-        android:layout_width="285dp"
-        android:layout_height="248dp"
+        android:layout_width="287dp"
+        android:layout_height="404dp"
         android:layout_column="0"
         android:layout_gravity="center"
-        android:layout_row="0" />
-    
-         
-
-
-    <RatingBar
-        android:id="@+id/ratingBar1"
-        android:layout_column="0"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_row="0" />
-
-    <AnalogClock
-        android:id="@+id/analogClock1"
-        android:layout_width="73dp"
-        android:layout_height="78dp"
-        android:layout_column="0"
-        android:layout_gravity="right|top"
         android:layout_row="0" />
 
 </GridLayout>

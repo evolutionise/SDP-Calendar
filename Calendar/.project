@@ -30,4 +30,11 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/model/AddingEvents.java</name>
+			<type>1</type>
+			<location>C:/Users/Sukhvinder/Downloads/Calendar (4)/Calendar/src/model/AddingEvents.java</location>
+		</link>
+	</linkedResources>
 </projectDescription>

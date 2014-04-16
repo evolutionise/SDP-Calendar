@@ -8,13 +8,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Calendar" >
+    
+    <com.tyczj.extendedcalendarview.ExtendedCalendarView 
+    android:id="@+id/calendar"
+    android:layout_height="404dp"
+    android:layout_width="287dp"
+    android:layout_column="0"
+    android:layout_gravity="center"
+    android:layout_row="0"/>
 
-    <CalendarView
-        android:id="@+id/calendarView1"
-        android:layout_width="287dp"
-        android:layout_height="404dp"
-        android:layout_column="0"
-        android:layout_gravity="center"
-        android:layout_row="0" />
+<!--     <CalendarView -->
+<!--         android:id="@+id/calendarView1" -->
+<!--         android:layout_width="287dp" -->
+<!--         android:layout_height="404dp" -->
+<!--         android:layout_column="0" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:layout_row="0" /> -->
 
 </GridLayout>

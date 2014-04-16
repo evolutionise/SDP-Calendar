@@ -1,14 +1,18 @@
 package com.example.calendar;
 
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
+
 import com.tyczj.extendedcalendarview.*;
 
-
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.text.format.Time;
 
 
 
@@ -22,25 +26,29 @@ public class Calendar extends Activity {
 		setupActionBar();
 	}
 	
-	public void addEvent(){
+	/**
+	 * @Event extends block 
+	 * @param block that handels the event creation 
+	 * 
+	 */
+	public void addEvent(Block block){
+		
 		ContentValues values = new ContentValues();
 	    values.put(CalendarProvider.COLOR, Event.COLOR_RED);
-	    values.put(CalendarProvider.DESCRIPTION, "Some Description");
-	    values.put(CalendarProvider.LOCATION, "Some location");
-	    values.put(CalendarProvider.EVENT, "Event name");
+	    values.put(CalendarProvider.DESCRIPTION, block.getDescription());
+	    values.put(CalendarProvider.LOCATION, block.getLocation());
+	    values.put(CalendarProvider.EVENT, block.getEvent());
 
-	    Calendar cal = Calendar.getInstance();
+	    java.util.Calendar cal = java.util.Calendar.getInstance();
+	    TimeZone tz = TimeZone.getDefault();
+	    int julianDay = Time.getJulianDay(cal.getTimeInMillis(), TimeUnit.MILLISECONDS.toSeconds(tz.getOffset(cal.getTimeInMillis())));
 
-	    cal.set(startDayYear, startDayMonth, startDayDay, startTimeHour, startTimeMin);
+	    cal.set(block.getYear(), block.getMonth(), block.getDay(), block.getHour(), block.getMin());
 	    values.put(CalendarProvider.START, cal.getTimeInMillis());
 	    values.put(CalendarProvider.START_DAY, julianDay);
-	    TimeZone tz = TimeZone.getDefault();
-
-	    cal.set(endDayYear, endDayMonth, endDayDay, endTimeHour, endTimeMin);
-	    int endDayJulian = Time.getJulianDay(cal.getTimeInMillis(), TimeUnit.MILLISECONDS.toSeconds(tz.getOffset(cal.getTimeInMillis())));
-
+	  
 	    values.put(CalendarProvider.END, cal.getTimeInMillis());
-	    values.put(CalendarProvider.END_DAY, endDayJulian);
+	    values.put(CalendarProvider.END_DAY, julianDay);
 
 	    Uri uri = getContentResolver().insert(CalendarProvider.CONTENT_URI, values);
 	}

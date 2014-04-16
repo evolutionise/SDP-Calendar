@@ -104,7 +104,7 @@ public abstract class Block {
 	 * @Param: 
 	 */
 	
-	public ArrayList<Block> getBlocksInMonth(){
+	public static ArrayList<Block> getBlocksInMonth(){
 		//insert code to request from database
 		ArrayList<Block> blocks = new ArrayList<Block>();
 		//hard-coding some examples for testing as DB is not running

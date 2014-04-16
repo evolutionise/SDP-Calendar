@@ -1,10 +1,11 @@
 package model;
 
 public class Event extends Block{
-	String location;
 
-	public Event(String location,
-			String eventTitle, 
+
+	public Event(String eventTitle, 
+			String eventLocation,
+			String eventDescription,
 			int year,
 			int month,
 			int day,
@@ -12,7 +13,7 @@ public class Event extends Block{
 			int minute){
 		
 		
-		super(eventTitle, year, month, day, hour, minute);
-		location = this.location;
+		super(eventTitle, eventLocation, eventDescription, year, month, day, hour, minute);
+
 	}
 }

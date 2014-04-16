@@ -23,6 +23,26 @@ public class Date {
 		
 	}
 	
+	public int getYear(){
+		return year;
+	}
+	
+	public int getMonth(){
+		return month;
+	}
+	
+	public int getDay(){
+		return day;
+	}
+	
+	public int getHour(){
+		return hour;
+	}
+	
+	public int getMins(){
+		return minute;
+	}
+	
 //	public enum Months {
 //		JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
 //	}

@@ -13,17 +13,13 @@ public class Calendar extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
 		// Show the Up button in the action bar.
-		setupActionBar();
+		//setupActionBar();
 	}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}.
 	 */
-	private void setupActionBar() {
-
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
-	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

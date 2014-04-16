@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".Menu" >
+    tools:context=".Menu"
+     >
 
     <TextView
         android:id="@+id/textView1"
@@ -18,11 +19,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <Button
+        <com.facebook.widget.LoginButton
             android:id="@+id/button1"
             style="@style/Buttons"
-            android:onClick="loginAction"
-            android:text="@string/loginButton" />
+            android:onClick="loginAction" />
 
         <Button
             android:id="@+id/button2"

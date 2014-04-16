@@ -15,8 +15,6 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
 
-
-
 public class Calendar extends Activity {
 
 	@Override
@@ -29,6 +27,7 @@ public class Calendar extends Activity {
 			addEvent(block);
 		}
 	}
+
 	
 	/**
 	 * @Event extends block 

@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public abstract class Block {
 	
 	private String blockTitle; //title of the event or task
+	private String blockLocation; //location of the event or task
+	private String blockDescription; //description of the event or task
 	private Date blockDate; //date and time of the event or task
 	
 	/*
@@ -29,6 +31,8 @@ public abstract class Block {
 	 */
 	
 	public Block(String blockTitle, 
+			String blockLocation,
+			String blockDescription,
 			int year,
 			int month,
 			int day,
@@ -48,14 +52,41 @@ public abstract class Block {
 		
 	}
 	
+	public String getLocation(){
+		return blockLocation;
+	}
+	
+	public String getDescription(){
+		return blockLocation;
+	}
+	
+	public int getYear(){
+		return blockDate.getYear();
+	}
+	
+	public int getMonth(){
+		return blockDate.getMonth();
+	}
+	
+	public int getDay(){
+		return blockDate.getDay();
+	}
+	
+	public int getHour(){
+		return blockDate.getHour();
+	}
+	
+	public int getMinutes(){
+		return blockDate.getMins();
+	}
+	
 	/*
 	 * Getter method for Date
 	 */
 	
 	public Date getDate(){
 		
-		return blockDate;
-		
+		return blockDate;		
 	}
 	
 	/*
@@ -65,6 +96,7 @@ public abstract class Block {
 	public void setTitle(String newTitle){
 		blockTitle = newTitle;
 	}
+	
 	
 	/*
 	 * Method to get all events in a month
@@ -76,8 +108,8 @@ public abstract class Block {
 		//insert code to request from database
 		ArrayList<Block> blocks = new ArrayList<Block>();
 		//hard-coding some examples for testing as DB is not running
-		Block exampleEvent = new Event("Example Location", "Example Title", 2014, 4, 15, 14, 30);
-		Block exampleTask = new Task(30, "Example Task Title", 2014, 4, 16, 11, 15);
+		Block exampleEvent = new Event("Example Location", "Example Title", "Example Description", 2014, 4, 15, 14, 30);
+		Block exampleTask = new Event("Example Title", "Example Location", "Example Task Title", 2014, 4, 16, 11, 15);
 		blocks.add(exampleEvent);
 		blocks.add(exampleTask);
 		return blocks;

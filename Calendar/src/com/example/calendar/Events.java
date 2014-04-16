@@ -1,9 +1,5 @@
 package com.example.calendar;
 
-
-
-
-import model.AddingEvents;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;
@@ -80,6 +76,7 @@ public class Events extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.button4: 
 			boolean didItWork = true;
+			/*
 			try{
 			String event = title.getText().toString();
 			String loc = location.getText().toString();
@@ -103,8 +100,11 @@ public class Events extends Activity implements OnClickListener {
 					d.show();
 					
 				}
+				
 			}
+			*/
 			break;
+			
 		}
 		
 	}

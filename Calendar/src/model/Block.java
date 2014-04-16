@@ -38,8 +38,10 @@ public abstract class Block {
 			int day,
 			int hour,
 			int minute){
-		blockTitle = this.blockTitle;
-		Date blockDate = new Date(year, month, day, hour, minute);
+		this.blockTitle = blockTitle;
+		this.blockDescription = blockDescription;
+		this.blockLocation = blockLocation;
+		blockDate = new Date(year, month, day, hour, minute);
 		
 	}
 	
@@ -57,7 +59,7 @@ public abstract class Block {
 	}
 	
 	public String getDescription(){
-		return blockLocation;
+		return blockDescription;
 	}
 	
 	public int getYear(){

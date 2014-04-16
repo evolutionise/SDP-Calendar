@@ -20,7 +20,7 @@ public class Calendar extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
 		// Show the Up button in the action bar.
-		setupActionBar();
+		//setupActionBar();
 		for(Block block:Block.getBlocksInMonth()){
 			addEvent(block);
 		}

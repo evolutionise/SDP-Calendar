@@ -59,8 +59,6 @@ public class Calendar extends Activity {
 	/**
 	 * Set up the {@link android.app.ActionBar}.
 	 */
-	
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

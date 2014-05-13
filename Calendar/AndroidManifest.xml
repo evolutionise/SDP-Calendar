@@ -8,6 +8,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     
  
 
@@ -68,7 +69,7 @@
             android:name="com.example.calendar.FacebookFragment"
             android:label="@string/title_activity_facebook_fragment" >
         </activity>
-        <meta-data android:value="app_id" android:name="com.facebook.sdk.ApplicationId" />
+        <meta-data android:value="@string/app_id" android:name="com.facebook.sdk.ApplicationId" />
     </application>
 
 </manifest>

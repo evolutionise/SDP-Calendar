@@ -6,6 +6,12 @@ package com.example.calendar;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -17,21 +23,47 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class Menu extends FragmentActivity {
 	
 
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
+	//shows login page.
+		Session.openActiveSession(this, true, new Session.StatusCallback() {
 
-		
+		      // callback when session changes state
+		      @Override
+		      public void call(Session session, SessionState state, Exception exception) {
+		        if (session.isOpened()) {
+
+		          Request.newMeRequest(session, new Request.GraphUserCallback() {
+
+		            // callback after Graph API response with user object
+		            @Override
+		            public void onCompleted(GraphUser user, Response response) {
+//		              if (user != null) {
+//		                TextView welcome = (TextView) findViewById(R.id.welcome);
+//		                welcome.setText("Hello " + user.getName() + "!");
+//		              }
+		            }
+		          }).executeAsync();
+		        }
+		      }
+		    });
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+	}
+	
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -39,25 +71,7 @@ public class Menu extends FragmentActivity {
 		return true;
 	}
 	
-public void loginAction(View view){
-		
-		CharSequence loginText = "Login";
-		
-		Toast loginToast = Toast.makeText(this, loginText, Toast.LENGTH_SHORT);
-		loginToast.show();
-		FacebookFragment fbFragment = new FacebookFragment();
-        getSupportFragmentManager()
-        .beginTransaction()
-        .add(android.R.id.content, fbFragment)
-        .commit();
-		
-//		Intent intent = new Intent(this, Login.class);
-//		startActivity(intent);
-//		
-		
-		
-		
-	}
+
 	
 	public void calendarAction(View view){
 		
@@ -81,6 +95,7 @@ public void loginAction(View view){
 		startActivity(intent);
 	}
 	
+	
 	public void devAction(View view){
 		
 		CharSequence devText = "Alix Klingenberg, Charlotte Paterson, Farah Qoulaq, Jaspreet Walia";
@@ -89,8 +104,9 @@ public void loginAction(View view){
 		devToast.show();
 	}
 	
+}	
 	
 	
 	
 
-}
+

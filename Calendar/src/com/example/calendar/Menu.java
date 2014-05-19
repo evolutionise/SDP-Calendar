@@ -2,19 +2,35 @@ package com.example.calendar;
 
 
 
-import android.os.Bundle;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 
-public class Menu extends Activity {
+public class Menu extends FragmentActivity {
+	
+
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
+
+		
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -29,9 +45,18 @@ public void loginAction(View view){
 		
 		Toast loginToast = Toast.makeText(this, loginText, Toast.LENGTH_SHORT);
 		loginToast.show();
+		FacebookFragment fbFragment = new FacebookFragment();
+        getSupportFragmentManager()
+        .beginTransaction()
+        .add(android.R.id.content, fbFragment)
+        .commit();
 		
-		Intent intent = new Intent(this, Login.class);
-		startActivity(intent);
+//		Intent intent = new Intent(this, Login.class);
+//		startActivity(intent);
+//		
+		
+		
+		
 	}
 	
 	public void calendarAction(View view){
@@ -63,5 +88,9 @@ public void loginAction(View view){
 		Toast devToast = Toast.makeText(this, devText, Toast.LENGTH_SHORT);
 		devToast.show();
 	}
+	
+	
+	
+	
 
 }

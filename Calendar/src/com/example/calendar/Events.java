@@ -1,5 +1,6 @@
 package com.example.calendar;
 
+import database.DatabaseHandler;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,13 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
-public class Events extends Activity implements OnClickListener {
+public class Events extends Activity {
 	
 	Button save;
 	EditText title, location, date;
 	TimePicker time;
+	DatabaseHandler handler;
 	
 
 	@Override
@@ -32,17 +35,24 @@ public class Events extends Activity implements OnClickListener {
 		title = (EditText) findViewById(R.id.editText1);
 		location = (EditText) findViewById(R.id.editText2);
 		date = (EditText) findViewById(R.id.editText3);
-		
-		save.setOnClickListener(this);
-		
 		save = (Button) findViewById(R.id.button4);
-		  save.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View view) {
-	            	Intent myIntent = new Intent(view.getContext(), DisplayMessageActivity.class);
-	                startActivityForResult(myIntent, 0);
-	            }
+		
+		save.setOnClickListener(new OnClickListener () {
 
-	        });
+			@Override
+			public void onClick(View arg0) {
+				String getTitle  = title.getText().toString();
+				String getLocation = location.getText().toString();
+				String getDate = date.getText().toString();
+				handler = new DatabaseHandler(getBaseContext());
+				handler.open();
+				long id = handler.insertData(getTitle, getLocation, getDate);
+				Toast.makeText(getBaseContext(), "data inserted", Toast.LENGTH_LONG).show();
+				handler.close();
+			}
+			
+		});
+		
 		
 		
 		Button menu = (Button) findViewById(R.id.button2);
@@ -72,42 +82,9 @@ public class Events extends Activity implements OnClickListener {
         });
 	}
 	
-	public void onClick (View v) {
-		switch (v.getId()) {
-		case R.id.button4: 
-			boolean didItWork = true;
-			/*
-			try{
-			String event = title.getText().toString();
-			String loc = location.getText().toString();
-			String dat = date.getText().toString();
-			int tim = time.getBaseline();
-			
-			AddingEvents entry = new AddingEvents(Events.this);
-			
-			entry.open();
-			entry.createEvent(event, loc, dat, tim);
-			entry.close();
-			}catch (Exception e) {
-				didItWork = false;
-			}finally{
-				if(didItWork) {
-					Dialog d = new Dialog(this);
-					d.setTitle("event saved!");
-					TextView tv = new TextView(this);
-					tv.setText("Success");
-					d.setContentView(tv);
-					d.show();
-					
-				}
-				
-			}
-			*/
-			break;
-			
-		}
+	
 		
-	}
+	
 
 	/**
 	 * Set up the {@link android.app.ActionBar}.

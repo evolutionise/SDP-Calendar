@@ -40,7 +40,7 @@ public class Events extends Activity {
 		save.setOnClickListener(new OnClickListener () {
 
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View view) {
 				String getTitle  = title.getText().toString();
 				String getLocation = location.getText().toString();
 				String getDate = date.getText().toString();
@@ -49,6 +49,8 @@ public class Events extends Activity {
 				long id = handler.insertData(getTitle, getLocation, getDate);
 				Toast.makeText(getBaseContext(), "data inserted", Toast.LENGTH_LONG).show();
 				handler.close();
+				Intent myIntent = new Intent(view.getContext(), DisplayMessageActivity.class);
+	                	startActivityForResult(myIntent, 0);
 			}
 			
 		});

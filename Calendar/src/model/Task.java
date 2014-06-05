@@ -9,9 +9,10 @@ public class Task extends Block{
 			int month,
 			int day,
 			int hour,
-			int minute) {
+			int minute,
+			String tag) {
 		
-		super(eventTitle, eventLocation, eventDescription, year, month, day, hour, minute);
+		super(eventTitle, eventLocation, eventDescription, year, month, day, hour, minute, tag);
 	}
 	
 

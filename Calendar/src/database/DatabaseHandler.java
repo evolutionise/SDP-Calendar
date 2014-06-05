@@ -1,5 +1,12 @@
 package database;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.calendar.Menu;
+
+import model.Block;
+import model.Event;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,30 +15,40 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHandler {
+
 	public static final String TITLE = "title";
 	public static final String LOCATION = "location";
-	public static final String DATE = "date";
+	public static final String DESCRIPTION = "description";
+	public static final String YEAR ="year";
+	public static final String MONTH ="month";
+	public static final String DAY ="day";
+	public static final String HOUR ="hour";
+	public static final String MINUTE ="minute";
+	public static final String TAG ="tag";
 	public static final String TABLE_NAME = "event";
 	public static final String DATABASE_NAME = "eventdb";
-	public static final int DATABASE_VERSION = 1;
-	public static final String TABLE_CREATE = "create table event(title text not null, location text, date text);";
+	public static final int DATABASE_VERSION = 5;
+	public static final String TABLE = "create table event(title TEXT, location TEXT, description TEXT, year INT, month INT, day INT, hour INT, minute INT, tag TEXT);";
 	
-	DatabaseHelper dbhelper; 
-	Context ctx;
-	SQLiteDatabase db;
-	public DatabaseHandler(Context ctx) {
-		this.ctx = ctx;
-		dbhelper = new DatabaseHelper(ctx);
+	private static DatabaseHelper dbhelper; 
+	private static SQLiteDatabase db;
+	
+	private DatabaseHandler() {
+		dbhelper = new DatabaseHelper();
+		db = dbhelper.getWritableDatabase();
 	}
+	
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 
-		public DatabaseHelper(Context ctx){
-			super(ctx,DATABASE_NAME,null,DATABASE_VERSION);
+		public DatabaseHelper() {
+			super(Menu.context, DATABASE_NAME,null,DATABASE_VERSION);
+			//onUpgrade(getWritableDatabase(),0,0);
 		}
+		
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			try{
-			db.execSQL(TABLE_CREATE);
+			db.execSQL(TABLE);
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
@@ -47,26 +64,61 @@ public class DatabaseHandler {
 		
 	}
 	
-	public DatabaseHandler open() {
-		db = dbhelper.getWritableDatabase();
-		return this; 
+	private static SQLiteDatabase getDB() {
+		if (db == null) {
+			new DatabaseHandler();
+		}
+		return db;
 	}
 	
-	public void close() {
+	private void close() {
 		dbhelper.close();
 	}
 	
-	public long insertData(String title, String location, String date) {
+	public static long insertEvent(Event event) {
 		ContentValues content = new ContentValues(); 
-		content.put(TITLE, title);
-		content.put(LOCATION, location);
-		content.put(DATE, date);
-		return db.insert(TABLE_NAME, null, content);
+		content.put(TITLE, event.getTitle());;
+		content.put(LOCATION, event.getLocation());
+		content.put(YEAR, event.getYear());
+		content.put(MONTH, event.getMonth());
+		content.put(DAY, event.getDay());
+		content.put(HOUR, event.getHour());
+		content.put(MINUTE, event.getMinutes());
+		content.put(DESCRIPTION, event.getDescription());
+		content.put(TAG, event.getTag());
+		return getDB().insert(TABLE_NAME, null, content);
 	}
 	
-	public Cursor returnData() {
-		return db.query(TABLE_NAME, new String[] {TITLE, LOCATION, DATE}, null, null, null, null, null);
+	public static List<Event> getEventsInMonth(int month, int year) {
+		//Select * From event Where Month=month And Year=year
+		List<Event> events = getEvents();
+	    for (Event event: events) {
+			if(event.getMonth() != month && event.getYear() != year) {
+				events.remove(event);
+			}
+		}
+		return events;
+		//return record set
 	}
 	
+	public static List<Event> getEvents() {
+		Cursor cursor = getDB().query(TABLE_NAME, new String[] {TITLE, LOCATION, DESCRIPTION, YEAR, MONTH, DAY, HOUR, MINUTE, TAG}, null, null, null, null, null);
+		List<Event> events = new ArrayList<Event>();
+		while (cursor.moveToNext()) {
+			Event event = new Event(
+					cursor.getString(0), 
+					cursor.getString(1),
+					cursor.getString(2),
+					cursor.getInt(3),
+					cursor.getInt(4),
+					cursor.getInt(5),
+					cursor.getInt(6),
+					cursor.getInt(7),
+					cursor.getString(8));
+			events.add(event);
+		}
+		return events;
+	}
+
 
 }

@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import database.DatabaseHandler;
+
 
 
 /*
@@ -17,7 +19,9 @@ public abstract class Block {
 	private String blockTitle; //title of the event or task
 	private String blockLocation; //location of the event or task
 	private String blockDescription; //description of the event or task
-	private Date blockDate; //date and time of the event or task
+	protected Date blockDate; //date and time of the event or task
+	private String tag;
+	private int  year, month, day, hour, minute;
 	
 	/*
 	 * Constructor method - child implementations will add more fields
@@ -37,10 +41,17 @@ public abstract class Block {
 			int month,
 			int day,
 			int hour,
-			int minute){
+			int minute,
+			String tag){
 		this.blockTitle = blockTitle;
 		this.blockDescription = blockDescription;
 		this.blockLocation = blockLocation;
+		this.tag = tag;
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
 		blockDate = new Date(year, month, day, hour, minute);
 		
 	}
@@ -63,29 +74,39 @@ public abstract class Block {
 	}
 	
 	public int getYear(){
-		return blockDate.getYear();
+		return year;
 	}
 	
 	public int getMonth(){
-		return blockDate.getMonth();
+		return month;
 	}
 	
 	public int getDay(){
-		return blockDate.getDay();
+		return day;
 	}
 	
 	public int getHour(){
-		return blockDate.getHour();
+		return hour;
 	}
 	
 	public int getMinutes(){
-		return blockDate.getMins();
+		return minute;
 	}
+	
+	
 	
 	/*
 	 * Getter method for Date
 	 */
 	
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
 	public Date getDate(){
 		
 		return blockDate;		
@@ -106,15 +127,7 @@ public abstract class Block {
 	 * @Param: 
 	 */
 	
-	public static ArrayList<Block> getBlocksInMonth(){
-		//insert code to request from database
-		ArrayList<Block> blocks = new ArrayList<Block>();
-		//hard-coding some examples for testing as DB is not running
-		Block exampleEvent = new Event("Example Location", "Example Title", "Example Description", 2014, 4, 15, 14, 30);
-		Block exampleTask = new Event("Example Title", "Example Location", "Example Task Title", 2014, 4, 16, 11, 15);
-		blocks.add(exampleEvent);
-		blocks.add(exampleTask);
-		return blocks;
-	}
+	
+
 
 }

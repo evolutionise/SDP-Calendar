@@ -1,9 +1,14 @@
 package com.example.calendar;
 
 import java.util.TimeZone;
+
 import model.Block;
+
 import java.util.concurrent.TimeUnit;
+
 import com.tyczj.extendedcalendarview.*;
+
+import database.DatabaseHandler;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,7 +26,7 @@ public class Calendar extends Activity {
 		setContentView(R.layout.activity_calendar);
 		// Show the Up button in the action bar.
 		//setupActionBar();
-		for(Block block:Block.getBlocksInMonth()){
+		for(Block block:DatabaseHandler.getEventsInMonth(6, 2014)){
 			addEvent(block);
 		}
 	}

@@ -13,6 +13,7 @@ import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -29,11 +30,13 @@ import android.widget.Toast;
 
 public class Menu extends FragmentActivity {
 	
+	public static Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
+		context = this;
 	//shows login page.
 		Session.openActiveSession(this, true, new Session.StatusCallback() {
 

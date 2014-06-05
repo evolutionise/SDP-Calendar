@@ -1,9 +1,12 @@
 package com.example.calendar;
 
+import model.Block;
+import model.Event;
 import database.DatabaseHandler;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +21,9 @@ import android.support.v4.app.NavUtils;
 
 public class Events extends Activity {
 	
-	Button save;
-	EditText title, location, date;
-	TimePicker time;
-	DatabaseHandler handler;
+	private Button save;
+	private EditText title, description, location, year, month, day, hour, minute;
+	private TimePicker time;
 	
 
 	@Override
@@ -31,30 +33,43 @@ public class Events extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		
 		title = (EditText) findViewById(R.id.editText1);
-		location = (EditText) findViewById(R.id.editText2);
-		date = (EditText) findViewById(R.id.editText3);
+		description = (EditText) findViewById(R.id.editText2);
+		location = (EditText) findViewById(R.id.editText3);
+		year = (EditText) findViewById(R.id.editText4);
+		month = (EditText) findViewById(R.id.editText5);
+		day = (EditText) findViewById(R.id.editText6);
+		hour = (EditText) findViewById(R.id.editText7);
+		minute = (EditText) findViewById(R.id.editText8);
 		save = (Button) findViewById(R.id.button4);
+		
+		final Context context = getApplicationContext();
 		
 		save.setOnClickListener(new OnClickListener () {
 
 			@Override
 			public void onClick(View view) {
-				String getTitle  = title.getText().toString();
-				String getLocation = location.getText().toString();
-				String getDate = date.getText().toString();
-				handler = new DatabaseHandler(getBaseContext());
-				handler.open();
-				long id = handler.insertData(getTitle, getLocation, getDate);
-				Toast.makeText(getBaseContext(), "data inserted", Toast.LENGTH_LONG).show();
-				handler.close();
-				Intent myIntent = new Intent(view.getContext(), DisplayMessageActivity.class);
-	                	startActivityForResult(myIntent, 0);
+				//System.out.println(year.getText().toString());
+				Event newEvent = new Event(
+						title.getText().toString(),
+						location.getText().toString(),
+						description.getText().toString(),
+						Integer.parseInt(year.getText().toString()),
+						Integer.parseInt(month.getText().toString()),
+						Integer.parseInt(day.getText().toString()),
+						Integer.parseInt(hour.getText().toString()),
+						Integer.parseInt(minute.getText().toString()),
+						"empty tag");
+				System.out.println(newEvent.getYear());
+				
+				DatabaseHandler.insertEvent(newEvent);
+				Toast.makeText(context, "event inserted", Toast.LENGTH_LONG).show();
+				//Intent myIntent = new Intent(view.getContext(), Calendar.class);
+				//startActivityForResult(myIntent, 0);
 			}
 			
 		});
-		
+
 		
 		
 		Button menu = (Button) findViewById(R.id.button2);

@@ -16,24 +16,6 @@
         android:layout_alignParentLeft="true"
         android:text="Attending?" />
 
-    <TimePicker
-        android:id="@+id/timePicker1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button4"
-        android:layout_marginBottom="20dp"
-        android:layout_toRightOf="@+id/textView1" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignRight="@+id/textView4"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="27dp"
-        android:text="Event Location" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -41,7 +23,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/editText1"
         android:layout_marginTop="27dp"
-        android:text="Event Date" />
+        android:text="Description" />
 
     <EditText
         android:id="@+id/editText2"
@@ -89,24 +71,6 @@
         android:layout_alignParentRight="true"
         android:ems="10" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/timePicker1"
-        android:layout_alignRight="@+id/button2"
-        android:layout_marginBottom="52dp"
-        android:text="Event Time" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/checkBox1"
-        android:layout_alignBottom="@+id/checkBox1"
-        android:layout_alignRight="@+id/timePicker1"
-        android:text="Save Event" />
-
     <Button
         android:id="@+id/button1"
         style="?android:attr/buttonStyleSmall"
@@ -126,5 +90,97 @@
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@+id/button1"
         android:text="Calendar" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="18dp"
+        android:text="Location" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/checkBox1"
+        android:layout_alignBottom="@+id/checkBox1"
+        android:layout_alignRight="@+id/editText3"
+        android:text="Save Event" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="68dp"
+        android:text="Time" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/editText3"
+        android:layout_marginTop="41dp"
+        android:text="Date" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_toRightOf="@+id/textView2" >
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/editText5"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editText6"
+            android:layout_width="63dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button4"
+        android:layout_alignTop="@+id/textView5"
+        android:layout_toRightOf="@+id/textView3" >
+
+        <EditText
+            android:id="@+id/editText7"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editText8"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -20,5 +20,6 @@
     <string name="event_saved">Event Saved!</string>
     <string name="app_id">716751798347879</string>
     <string name="title_activity_facebook_fragment">FacebookFragment</string>
+    <string name="tag_button">&quot;Tag:&quot;</string>
 
 </resources>

@@ -101,7 +101,7 @@ int drawable purple 0x7f020033
 int drawable quickcontact_badge_overlay_normal_light 0x7f020034
 int drawable red 0x7f020035
 int drawable today 0x7f020036
-int id action_settings 0x7f070039
+int id action_settings 0x7f07003d
 int id button1 0x7f07000c
 int id button2 0x7f07000b
 int id button3 0x7f07000d
@@ -142,6 +142,8 @@ int id editText5 0x7f070012
 int id editText6 0x7f070013
 int id editText7 0x7f070014
 int id editText8 0x7f070015
+int id eventList 0x7f07003c
+int id eventName 0x7f070039
 int id imageView1 0x7f070017
 int id imageView2 0x7f070035
 int id imageView3 0x7f070036
@@ -149,10 +151,12 @@ int id imageView4 0x7f070034
 int id imageView5 0x7f070037
 int id imageView6 0x7f070038
 int id large 0x7f070002
+int id linearLayout1 0x7f07003a
 int id normal 0x7f070001
 int id picker_subtitle 0x7f070027
 int id rl 0x7f070032
 int id small 0x7f070000
+int id tagSelection 0x7f07003b
 int id textView1 0x7f070006
 int id textView2 0x7f070005
 int id textView3 0x7f07000a
@@ -182,7 +186,9 @@ int layout com_facebook_tooltip_bubble 0x7f030013
 int layout com_facebook_usersettingsfragment 0x7f030014
 int layout day_of_week 0x7f030015
 int layout day_view 0x7f030016
-int layout fragment_facebook 0x7f030017
+int layout event_details 0x7f030017
+int layout fragment_facebook 0x7f030018
+int layout tag_search 0x7f030019
 int menu calendar 0x7f090000
 int menu display_message 0x7f090001
 int menu events 0x7f090002
@@ -232,6 +238,7 @@ int string loginButton 0x7f050028
 int string monday 0x7f050001
 int string saturday 0x7f050006
 int string sunday 0x7f050007
+int string tag_button 0x7f050034
 int string thursday 0x7f050004
 int string titleMenu 0x7f050027
 int string title_activity_calendar 0x7f050026

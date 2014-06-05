@@ -121,11 +121,6 @@ public abstract class Block {
 	}
 	
 	
-	/*
-	 * Method to get all events in a month
-	 * 
-	 * @Param: 
-	 */
 	
 	
 

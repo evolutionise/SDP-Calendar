@@ -1,5 +1,6 @@
 package com.example.calendar;
 
+import java.util.List;
 import java.util.TimeZone;
 
 import model.Block;
@@ -7,6 +8,7 @@ import model.Block;
 import java.util.concurrent.TimeUnit;
 
 import com.tyczj.extendedcalendarview.*;
+import com.tyczj.extendedcalendarview.ExtendedCalendarView.OnDayClickListener;
 
 import database.DatabaseHandler;
 import android.net.Uri;
@@ -15,10 +17,13 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
 
-public class Calendar extends Activity {
+public class Calendar extends Activity implements OnDayClickListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,9 @@ public class Calendar extends Activity {
 		setContentView(R.layout.activity_calendar);
 		// Show the Up button in the action bar.
 		//setupActionBar();
+		
+		ExtendedCalendarView cal = (ExtendedCalendarView ) findViewById(R.id.calendar);
+		cal.setOnDayClickListener(this);
 		for(Block block:DatabaseHandler.getEventsInMonth(6, 2014)){
 			addEvent(block);
 		}
@@ -86,6 +94,22 @@ public class Calendar extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+
+	@Override
+	public void onDayClicked(AdapterView<?> adapter, View view, int position,
+			long id, Day day) {
+		List<model.Event> events = DatabaseHandler.getEvents();
+	    for (model.Event event: events) {
+	    	
+	    	if(event.getDay() == day.getDay()){
+	    	Toast toast = Toast.makeText(this, event.getTitle(), Toast.LENGTH_SHORT);
+	        toast.show();
+	    	}
+	    	
+	    }
+		
 	}
 
 }

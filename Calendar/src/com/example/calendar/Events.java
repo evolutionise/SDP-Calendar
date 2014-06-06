@@ -33,6 +33,7 @@ public class Events extends Activity {
 		location = (EditText) findViewById(R.id.locationText);
 		year = (EditText) findViewById(R.id.yearText);
 		month = (EditText) findViewById(R.id.monthText);
+		
 		day = (EditText) findViewById(R.id.dayText);
 		hour = (EditText) findViewById(R.id.hourText);
 		minute = (EditText) findViewById(R.id.minuteText);

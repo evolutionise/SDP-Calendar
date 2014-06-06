@@ -81,14 +81,7 @@ public class Events extends Activity {
 
         });
      
-        Button login = (Button) findViewById(R.id.button1);
-        menu.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	Intent myIntent = new Intent(view.getContext(), Login.class);
-                startActivityForResult(myIntent, 0);
-            }
-
-        });
+        
         Button calendar = (Button) findViewById(R.id.button3);
         menu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

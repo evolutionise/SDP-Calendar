@@ -6,11 +6,13 @@ import model.Block;
 
 import java.util.concurrent.TimeUnit;
 
+import com.facebook.Session;
 import com.tyczj.extendedcalendarview.*;
 
 import database.DatabaseHandler;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.view.Menu;
@@ -20,13 +22,26 @@ import android.text.format.Time;
 
 public class Calendar extends Activity {
 
+	Session session;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
-		// Show the Up button in the action bar.
-		//setupActionBar();
-		for(Block block:DatabaseHandler.getEventsInMonth(6, 2014)){
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.hide(); //Hides action bar.
+		
+		session = Session.getActiveSession(); //Checks if user is logged in.
+		
+		//Add the facebook events is the user is logged in.
+		if(session.isOpened()){
+			DatabaseHandler.addFacebookEvents();
+		}
+		
+		//Show all of the events on the Calendar.
+		for(Block block:DatabaseHandler.getEvents()){
 			addEvent(block);
 		}
 	}

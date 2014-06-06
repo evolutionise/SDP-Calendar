@@ -3,7 +3,16 @@ package database;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.example.calendar.Menu;
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.model.GraphObject;
+import com.facebook.model.GraphUser;
 
 import model.Block;
 import model.Event;
@@ -13,7 +22,14 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
 
+/**
+ * Class handles all the events added to database
+ * 
+ * @author Charlotte, Jaspreet, Alix, Farah
+ *
+ */
 public class DatabaseHandler {
 
 	public static final String TITLE = "title";
@@ -33,11 +49,17 @@ public class DatabaseHandler {
 	private static DatabaseHelper dbhelper; 
 	private static SQLiteDatabase db;
 	
+	/**
+	 * Create Database.
+	 */
 	private DatabaseHandler() {
 		dbhelper = new DatabaseHelper();
 		db = dbhelper.getWritableDatabase();
 	}
 	
+	/**
+	 * Creating Table and verifying the database.
+	 */
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 
 		public DatabaseHelper() {
@@ -64,6 +86,10 @@ public class DatabaseHandler {
 		
 	}
 	
+	/**
+	 * 
+	 * @return The database.
+	 */
 	private static SQLiteDatabase getDB() {
 		if (db == null) {
 			new DatabaseHandler();
@@ -99,6 +125,84 @@ public class DatabaseHandler {
 		}
 		return events;
 		//return record set
+	}
+	
+	public static void addFacebookEvents(){
+		
+		Session session = Session.getActiveSession();
+
+		if (session.isOpened()) {
+	          // make request to the /me API
+	          Request.newMeRequest(session, new Request.GraphUserCallback() {
+	            // callback after Graph API response with user object
+
+				@Override
+				public void onCompleted(GraphUser user, Response response) {
+					// TODO Auto-generated method stub
+					if (user != null) {
+						String fqlQuery = "select eid, name, description, start_time, location from event where eid in (select eid from event_member where uid=me())";
+						Bundle params = new Bundle();
+						params.putString("q", fqlQuery);
+						
+						Session session = Session.getActiveSession();
+						Request request = new Request(session, 
+						    "/fql", 
+						    params, 
+						    HttpMethod.GET, 
+						    new Request.Callback(){ 
+							public void onCompleted(Response response) {
+								
+								try
+							    {
+							        GraphObject go  = response.getGraphObject();
+							        JSONObject  jso = go.getInnerJSONObject();
+							        JSONArray   arr = jso.getJSONArray( "data" );
+
+							        for ( int i = 0; i < ( arr.length() ); i++ )
+							        {
+							            JSONObject json_obj = arr.getJSONObject(i);
+							            String id     = json_obj.getString("eid");
+							            String name   = json_obj.getString("name");
+							            String description = json_obj.getString("description");
+							            String startTime = json_obj.getString("start_time");
+							            int year = 0;
+							            int month = 0;
+							            int day = 0;
+							            if(startTime != null){
+							            	String[] time = startTime.split("-|T");
+							            	if(time.length > 2){
+							            		year = Integer.parseInt(time[0]);
+							            		month = Integer.parseInt(time[1]);
+							            		day = Integer.parseInt(time[2]);
+							            	}
+							            	
+							            }
+							            
+							            String location = json_obj.getString("location");
+							            Event tempEvent = new Event(name, location, description, year, month, day, 0, 0, "Facebook");
+							            //Checks that the event has not already been created.
+							            for(Event e: getEvents()){
+							            	if(e.getTag().equals("Facebook")){
+							            		if(!(e.getTitle().equals(name) && e.getDay() == day)){
+							            			insertEvent(tempEvent);
+							            		}
+							            	}
+							            } 
+							        }
+							        
+							    }
+							    catch (Throwable t )
+							    {
+							        t.printStackTrace();
+							    }
+						    }
+							
+						});
+						Request.executeBatchAsync(request);
+		            }
+				}
+	          }).executeAsync();
+		}
 	}
 	
 	public static List<Event> getEvents() {

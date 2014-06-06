@@ -19,6 +19,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <com.facebook.widget.LoginButton
+            android:id="@+id/authButton"
+            style="@style/Buttons"
+        	android:layout_marginTop="30dp" />
+
         <Button
             android:id="@+id/button2"
             style="@style/Buttons"

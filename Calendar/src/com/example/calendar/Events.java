@@ -1,11 +1,9 @@
 package com.example.calendar;
 
-import model.Block;
 import model.Event;
 import database.DatabaseHandler;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
@@ -14,16 +12,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class Events extends Activity {
 	
 	private Button save;
-	private EditText title, description, location, year, month, day, hour, minute;
-	private TimePicker time;
+	private EditText title, description, location, year, month, day, hour, minute, tag;
 	
 
 	@Override
@@ -33,15 +28,16 @@ public class Events extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		title = (EditText) findViewById(R.id.editText1);
-		description = (EditText) findViewById(R.id.editText2);
-		location = (EditText) findViewById(R.id.editText3);
-		year = (EditText) findViewById(R.id.editText4);
-		month = (EditText) findViewById(R.id.editText5);
-		day = (EditText) findViewById(R.id.editText6);
-		hour = (EditText) findViewById(R.id.editText7);
-		minute = (EditText) findViewById(R.id.editText8);
-		save = (Button) findViewById(R.id.button4);
+		title = (EditText) findViewById(R.id.titleText);
+		description = (EditText) findViewById(R.id.descriptionText);
+		location = (EditText) findViewById(R.id.locationText);
+		year = (EditText) findViewById(R.id.yearText);
+		month = (EditText) findViewById(R.id.monthText);
+		day = (EditText) findViewById(R.id.dayText);
+		hour = (EditText) findViewById(R.id.hourText);
+		minute = (EditText) findViewById(R.id.minuteText);
+		save = (Button) findViewById(R.id.saveButton);
+		tag = (EditText) findViewById(R.id.tagText);
 		
 		final Context context = getApplicationContext();
 		
@@ -59,7 +55,7 @@ public class Events extends Activity {
 						Integer.parseInt(day.getText().toString()),
 						Integer.parseInt(hour.getText().toString()),
 						Integer.parseInt(minute.getText().toString()),
-						"empty tag");
+						tag.getText().toString());
 				System.out.println(newEvent.getYear());
 				
 				DatabaseHandler.insertEvent(newEvent);
@@ -72,7 +68,7 @@ public class Events extends Activity {
 
 		
 		
-		Button menu = (Button) findViewById(R.id.button2);
+		Button menu = (Button) findViewById(R.id.menuButton);
         menu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	Intent myIntent = new Intent(view.getContext(), Menu.class);
@@ -81,16 +77,17 @@ public class Events extends Activity {
 
         });
      
-        Button login = (Button) findViewById(R.id.button1);
-        menu.setOnClickListener(new View.OnClickListener() {
+        Button login = (Button) findViewById(R.id.loginButton);
+        login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	Intent myIntent = new Intent(view.getContext(), Login.class);
                 startActivityForResult(myIntent, 0);
             }
 
         });
-        Button calendar = (Button) findViewById(R.id.button3);
-        menu.setOnClickListener(new View.OnClickListener() {
+        
+        Button calendar = (Button) findViewById(R.id.calendarButton);
+        calendar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	Intent myIntent = new Intent(view.getContext(), Calendar.class);
                 startActivityForResult(myIntent, 0);

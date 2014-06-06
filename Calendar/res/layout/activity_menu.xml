@@ -30,6 +30,13 @@
             style="@style/Buttons"
             android:onClick="createEventAction"
             android:text="@string/createEventButton" />
+        
+        <Button
+            android:id="@+id/tagSearchButton"
+            style="@style/Buttons"
+            android:onClick="tagSearchAction"
+            android:text="@string/tag_search_button"/>
+        
 
     </LinearLayout>
 

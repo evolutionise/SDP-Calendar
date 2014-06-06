@@ -21,5 +21,13 @@
     <string name="app_id">716751798347879</string>
     <string name="title_activity_facebook_fragment">FacebookFragment</string>
     <string name="tag_button">&quot;Tag:&quot;</string>
+    <string name="tag_search_button">Search Tags</string>
+    <string name="description_string">Description</string>
+    <string name="save_event_string">Save Event</string>
+    <string name="login_button">Login</string>
+    <string name="time_string">Time</string>
+    <string name="date_string">Date</string>
+    <string name="location_string">Location</string>
+    <string name="tag_string">Tag</string>
 
 </resources>

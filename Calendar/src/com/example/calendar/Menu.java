@@ -3,7 +3,6 @@ package com.example.calendar;
 
 
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.facebook.Request;
@@ -95,6 +94,12 @@ public class Menu extends FragmentActivity {
 		createEventToast.show();
 		
 		Intent intent = new Intent(this, Events.class);
+		startActivity(intent);
+	}
+	
+	//action when Search Tags button is clicked
+	public void tagSearchAction(View view){
+		Intent intent = new Intent(this, TagSearch.class);
 		startActivity(intent);
 	}
 	
